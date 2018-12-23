@@ -12,10 +12,7 @@ my %lookup = map +(
     uc $_ => $_
 ), 'a' .. 'z';
 
-for ( my $i = 0; $i <= $length; $i++ ) {
-    $i == $length and last;
-    my ( $current, $next ) = @chars[ $i, $i + 1 ];
-
+for ( my $i = 0; $i < $length; $i++ ) {
     if ( DEBUG() ) {
         print "[$i] $string\n";
         print "    ";
@@ -26,7 +23,7 @@ for ( my $i = 0; $i <= $length; $i++ ) {
     }
 
     # Only inspect when we need
-    $next eq $lookup{$current}
+    $chars[ $i + 1 ] eq $lookup{ $chars[$i] }
         or next;
 
     splice @chars, $i, 2;  # Remove characters

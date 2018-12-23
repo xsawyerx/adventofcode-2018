@@ -18,10 +18,7 @@ foreach my $letter ( 'a' .. 'z' ) {
     my @chars  = split //, $string;
     my $length = $#chars;
 
-    for ( my $i = 0; $i <= $length; $i++ ) {
-        $i == $length and last;
-        my ( $current, $next ) = @chars[ $i, $i + 1 ];
-
+    for ( my $i = 0; $i < $length; $i++ ) {
         if ( DEBUG() ) {
             print "[$i] $string\n";
             print "    ";
@@ -32,7 +29,7 @@ foreach my $letter ( 'a' .. 'z' ) {
         }
 
         # Only inspect when we need
-        $next eq $lookup{$current}
+        $chars[ $i + 1 ] eq $lookup{ $chars[$i] }
             or next;
 
         splice @chars, $i, 2;  # Remove characters
